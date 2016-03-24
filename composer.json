@@ -1,9 +1,9 @@
 {
-	"name": "senasi/lazyPDO",
+	"name": "senasi/lazy-pdo",
 	"type": "library",
 	"description": "Lazy loadable PDO",
 	"keywords": ["PDO", "lazyload", "lazy"],
-	"homepage": "https://github.com/senasi/lazyPDO",
+	"homepage": "https://github.com/senasi/lazy-pdo",
 	"license": "MIT",
 	"authors": [
 		{
