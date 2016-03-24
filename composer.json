@@ -1,0 +1,25 @@
+{
+	"name": "senasi/lazyPDO",
+	"type": "library",
+	"description": "Lazy loadable PDO",
+	"keywords": ["PDO", "lazyload", "lazy"],
+	"homepage": "https://github.com/senasi/lazyPDO",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Vlado Senasi",
+			"email": "vlado@senasi.sk",
+			"homepage": "https://github.com/senasi",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.4",
+		"ext-pdo": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"LazyPDO\\": "src/"
+		}
+	}
+}

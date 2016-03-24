@@ -7,16 +7,40 @@ use PDO;
 
 class LazyPDO extends PDO {
 
+	/**
+	 * @var string
+	 */
 	protected $dsn;
 
+	/**
+	 * @var string
+	 */
 	protected $username;
 
+	/**
+	 * @var string
+	 */
 	protected $password;
 
-	protected $options;
+	/**
+	 * @var array
+	 */
+	protected $options = [];
 
+	/**
+	 * @var boolean True if PDO was initialized
+	 */
 	protected $initialized = false;
 
+	/**
+	 * Creates a lazy-loaded PDO instance representing a connection to a database
+	 *
+	 * @param string $dsn
+	 * @param string $username
+	 * @param string $password
+	 * @param array $options
+	 * @return PDO
+	 */
 	public function __construct($dsn, $username = null, $password = null, array $options = [])
 	{
 		$this->dsn = $dsn;
@@ -27,6 +51,7 @@ class LazyPDO extends PDO {
 
 	/**
 	 * Init PDO once, if not already initialized
+	 *
 	 */
 	protected function initialize()
 	{
@@ -159,8 +184,27 @@ class LazyPDO extends PDO {
 		return call_user_func_array('parent::query', func_get_args());
 	}
 
-
-
-
+	/**
+	 * Rolls back a transaction
+	 *
+	 * @return boolean
+	 */
+	public function rollback()
+	{
+		$this->initialize();
+		return parent::rollBack();
+	}
+	/**
+	 * Set an attribute
+	 *
+	 * @param int $attribute
+	 * @param mixed $value
+	 * @return boolean
+	 */
+	public function setAttribute($attribute, $value)
+	{
+		$this->initialize();
+		return parent::setAttribute($attribute, $value);
+	}
 
 }
