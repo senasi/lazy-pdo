@@ -119,17 +119,10 @@ class LazyPDO extends PDO {
 		return parent::exec($statement);
 	}
 
-	/**
-	 * Retrieve a database connection attribute
-	 *
-	 * @param int $attribute
-	 * @return mixed
-	 */
-	public function getAttribute($attribute)
-	{
-		$this->initialize();
-		return parent::getAttribute($attribute);
-	}
+	// not needed - doesnt require db conenction
+	// public function getAttribute($attribute)
+	// {
+	// }
 
 	// not needed - static function
 	// public static function getAvailableDrivers()
@@ -194,17 +187,10 @@ class LazyPDO extends PDO {
 		$this->initialize();
 		return parent::rollBack();
 	}
-	/**
-	 * Set an attribute
-	 *
-	 * @param int $attribute
-	 * @param mixed $value
-	 * @return boolean
-	 */
-	public function setAttribute($attribute, $value)
-	{
-		$this->initialize();
-		return parent::setAttribute($attribute, $value);
-	}
+
+	// not needed - doesnt require database connection
+	// public function setAttribute($attribute, $value)
+	// {
+	// }
 
 }
