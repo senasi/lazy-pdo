@@ -33,6 +33,11 @@ class LazyPDO extends PDO {
 	protected $initialized = false;
 
 	/**
+	 * @var array Storage for attributes which are set before initializing connection
+	 */
+	protected $attributes = [];
+
+	/**
 	 * Creates a lazy-loaded PDO instance representing a connection to a database
 	 *
 	 * @param string $dsn
@@ -57,6 +62,11 @@ class LazyPDO extends PDO {
 	{
 		if (!$this->initialized) {
 			parent::__construct($this->dsn, $this->username, $this->password, $this->options);
+
+			foreach ($this->attributes as $key => $value) {
+				parent::setAttribute($key, $value);
+			}
+
 			$this->initialized = true;
 		}
 	}
@@ -119,10 +129,17 @@ class LazyPDO extends PDO {
 		return parent::exec($statement);
 	}
 
-	// not needed - doesnt require db conenction
-	// public function getAttribute($attribute)
-	// {
-	// }
+	/**
+	 * Retrieve a database connection attribute
+	 *
+	 * @param int $attribute
+	 * @return mixed
+	 */
+	public function getAttribute($attribute)
+	{
+		$this->initialize();
+		return parent::getAttribute($attribute);
+	}
 
 	// not needed - static function
 	// public static function getAvailableDrivers()
@@ -188,9 +205,21 @@ class LazyPDO extends PDO {
 		return parent::rollBack();
 	}
 
-	// not needed - doesnt require database connection
-	// public function setAttribute($attribute, $value)
-	// {
-	// }
+	/**
+	 * Set an attribute
+	 *
+	 * @param int $attribute
+	 * @param mixed $value
+	 * @return boolean
+	 */
+	public function setAttribute($attribute, $value)
+	{
+		if ($this->initialized) {
+			return parent::setAttribute($attribute, $value);
+		} else {
+			$this->attributes[$attribute] = $value;
+			return true;
+		}
+	}
 
 }
