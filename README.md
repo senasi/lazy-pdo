@@ -14,7 +14,7 @@ composer install senasi/lazy-pdo
 
 ## Usage
 
-```
+```php
 $dsn = 'mysql:hostname=localhost;dbname=test';
 $user = 'test';
 $password = 'test';
