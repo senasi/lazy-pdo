@@ -176,7 +176,7 @@ class LazyPDO extends PDO {
 	 * @param array $driver_options
 	 * @return \PDOStatement
 	 */
-	public function prepare($statement, $driver_options = null)
+	public function prepare($statement, $driver_options = [])
 	{
 		$this->initialize();
 		return parent::prepare($statement, $driver_options);
